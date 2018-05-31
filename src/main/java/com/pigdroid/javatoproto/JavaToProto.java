@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
+import org.apache.log4j.Logger;
+
 /**
  * Copyright - Lloyd Sparkes 2012
  * 				eduyayo@gmail.com
@@ -109,8 +111,8 @@ public class JavaToProto {
 				out.flush();
 				out.close();
 			} catch (Exception e) {
-				System.out.println("Got Exception while Writing to File - See Console for File Contents");
-				System.out.println(protoFile);
+				System.err.println("Got Exception while Writing to File - See Console for File Contents");
+				System.err.println(protoFile);
 				e.printStackTrace();
 			}
 			
