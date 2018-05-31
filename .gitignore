@@ -6,3 +6,6 @@
 *.DS_Store
 *.swp
 *.out
+/target/
+/.classpath
+/.project
