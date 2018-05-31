@@ -2,8 +2,11 @@ package com.pigdroid.javatoproto;
 
 import org.junit.Test;
 
-import com.pigdroid.javatoproto.*;
-import com.pigdroid.javatoproto.samples.*;
+import com.pigdroid.javatoproto.samples.ArrayMessage;
+import com.pigdroid.javatoproto.samples.ListMessage;
+import com.pigdroid.javatoproto.samples.MapMessage;
+import com.pigdroid.javatoproto.samples.POJOMessage;
+import com.pigdroid.javatoproto.samples.SimpleMessage;
 
 public class ProtoFileGenerationTests {
 

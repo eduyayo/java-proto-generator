@@ -7,5 +7,21 @@ public class ListMessage {
 
 	private List<Integer> testList;
 	private Set<Integer> testSet;
-	
+
+	public List<Integer> getTestList() {
+		return testList;
+	}
+
+	public void setTestList(List<Integer> testList) {
+		this.testList = testList;
+	}
+
+	public Set<Integer> getTestSet() {
+		return testSet;
+	}
+
+	public void setTestSet(Set<Integer> testSet) {
+		this.testSet = testSet;
+	}
+
 }

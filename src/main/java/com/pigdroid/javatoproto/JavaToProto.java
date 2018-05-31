@@ -15,6 +15,8 @@ import java.util.Stack;
 
 /**
  * Copyright - Lloyd Sparkes 2012
+ * 				eduyayo@gmail.com
+ * 
  * LICENSE: Public Domain - do as you wish, just retain this message.
  * 				I just ask that if you find bugs or improve the code, you raise a push request or an issue, so i can update the code for everyone
  * DISCLAIMER: I am not responsible for your usage of this code, or for any bugs or issues with this code or any resulting side effects
@@ -68,8 +70,8 @@ public class JavaToProto {
 	private static String LINE_END = ";";
 	
 	private StringBuilder builder;
-	private Stack<Class> classStack = new Stack<Class>();
-	private Map<Class, String> typeMap = getPrimitivesMap();
+	private Stack<Class<?>> classStack = new Stack<Class<?>>();
+	private Map<Class<?>, String> typeMap = getPrimitivesMap();
 	private int tabDepth = 0;
 
 	/**
@@ -82,7 +84,7 @@ public class JavaToProto {
 			System.out.println("Usage: \n\tjava -jar JavaToProto.jar JavaToProto <class name> [<output file name>]\n");
 		}
 		
-		Class clazz;
+		Class<?> clazz;
 		
 		try {
 			clazz = Class.forName(args[0]);
@@ -123,7 +125,7 @@ public class JavaToProto {
 	 * Creates a new Instance of JavaToProto to process the given class
 	 * @param classToProcess - The Class to be Processed - MUST NOT BE NULL!
 	 */
-	public JavaToProto(Class classToProcess){
+	public JavaToProto(Class<?> classToProcess){
 		if(classToProcess == null){
 			throw new RuntimeException("You gave me a null class to process. This cannot be done, please pass in an instance of Class");
 		}
@@ -145,10 +147,10 @@ public class JavaToProto {
 	public String getPath(){
 		String path = "";
 		
-		Stack<Class> tStack = new Stack<Class>();
+		Stack<Class<?>> tStack = new Stack<Class<?>>();
 		
 		while(!classStack.isEmpty()) {
-			Class t = classStack.pop();
+			Class<?> t = classStack.pop();
 			if(path.length() == 0){
 				path = t.getSimpleName();
 			} else {
@@ -164,12 +166,12 @@ public class JavaToProto {
 		return path;
 	}
 	
-	public Class currentClass(){
+	public Class<?> currentClass(){
 		return classStack.peek();
 	}
 	
-	public Map<Class,String> getPrimitivesMap(){
-		Map<Class, String> results = new HashMap<Class, String>();
+	public Map<Class<?>,String> getPrimitivesMap(){
+		Map<Class<?>, String> results = new HashMap<Class<?>, String>();
 		
 		results.put(double.class, "double");
 		results.put(float.class, "float");
@@ -239,7 +241,7 @@ public class JavaToProto {
 				continue;
 			}
 			
-			Class fieldType = f.getType();
+			Class<?> fieldType = f.getType();
 			
 			//Primitives or Types we have come across before
 			if(typeMap.containsKey(fieldType)){
@@ -254,16 +256,16 @@ public class JavaToProto {
 			}
 			
 			if(Map.class.isAssignableFrom(fieldType)){
-				Class innerType = null;
-				Class innerType2 = null;
+				Class<?> innerType = null;
+				Class<?> innerType2 = null;
 				String entryName = "Entry_"+f.getName();
 				
 				Type t = f.getGenericType();
 				
 				if(t instanceof ParameterizedType){
 					ParameterizedType tt = (ParameterizedType)t;
-					innerType = (Class) tt.getActualTypeArguments()[0];
-					innerType2 = (Class) tt.getActualTypeArguments()[1];	
+					innerType = (Class<?>) tt.getActualTypeArguments()[0];
+					innerType2 = (Class<?>) tt.getActualTypeArguments()[1];	
 					buildEntryType(entryName, innerType, innerType2);
 				}
 				
@@ -272,7 +274,7 @@ public class JavaToProto {
 			}
 			
 			if(fieldType.isArray()){
-				Class innerType = fieldType.getComponentType();
+				Class<?> innerType = fieldType.getComponentType();
 				if(!typeMap.containsKey(innerType)){
 					buildNestedType(innerType);
 				}
@@ -281,13 +283,13 @@ public class JavaToProto {
 			}
 			
 			if(Collection.class.isAssignableFrom(fieldType)){
-				Class innerType = null;
+				Class<?> innerType = null;
 				
 				Type t = f.getGenericType();
 				
 				if(t instanceof ParameterizedType){
 					ParameterizedType tt = (ParameterizedType)t;
-					innerType = (Class) tt.getActualTypeArguments()[0];
+					innerType = (Class<?>) tt.getActualTypeArguments()[0];
 				}
 				
 				if(!typeMap.containsKey(innerType)){
@@ -304,13 +306,13 @@ public class JavaToProto {
 		}
 	}
 	
-	private void buildNestedType(Class type){
+	private void buildNestedType(Class<?> type){
 		classStack.push(type);
 		buildMessage();
 		classStack.pop();
 	}
 	
-	private void buildEntryType(String name, Class innerType, Class innerType2) {
+	private void buildEntryType(String name, Class<?> innerType, Class<?> innerType2) {
 	
 		typeMap.put(currentClass(), getPath());
 		
@@ -337,7 +339,7 @@ public class JavaToProto {
 		builder.append(getTabs()).append(CLOSE_BLOCK).append(NEWLINE);
 	}
 
-	private void processEnum(Class enumType){
+	private void processEnum(Class<?> enumType){
 		
 		classStack.push(enumType);
 		typeMap.put(enumType, getPath());
