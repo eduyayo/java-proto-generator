@@ -54,4 +54,44 @@ public class SimpleMessage {
 		this.testBool = testBool;
 	}
 
+	public Boolean getTestBool2() {
+		return testBool2;
+	}
+
+	public void setTestBool2(Boolean testBool2) {
+		this.testBool2 = testBool2;
+	}
+
+	public Long getTestLong2() {
+		return testLong2;
+	}
+
+	public void setTestLong2(Long testLong2) {
+		this.testLong2 = testLong2;
+	}
+
+	public Integer getTestInt2() {
+		return testInt2;
+	}
+
+	public void setTestInt2(Integer testInt2) {
+		this.testInt2 = testInt2;
+	}
+
+	public Float getTestFloat2() {
+		return testFloat2;
+	}
+
+	public void setTestFloat2(Float testFloat2) {
+		this.testFloat2 = testFloat2;
+	}
+
+	public Double getTestDouble2() {
+		return testDouble2;
+	}
+
+	public void setTestDouble2(Double testDouble2) {
+		this.testDouble2 = testDouble2;
+	}
+
 }
