@@ -1,6 +1,8 @@
 ##Java to Proto
 
-Copyright - Lloyd Sparkes 2012
+Copyright 
+* Lloyd Sparkes 2012
+* eduyayo@gmail.com
 
 LICENSE: Public Domain - do as you wish, just retain this message. I just ask that if you find bugs or improve the code, you raise a pull request or an issue, so I can update the code for everyone
 				
