@@ -1,4 +1,4 @@
-package com.lloyd.JavaToProto;
+package com.pigdroid.javatoproto;
 
 import java.io.BufferedWriter;
 import java.io.File;

@@ -1,4 +1,4 @@
-package com.lloyd.JavaToProto.tests.samples;
+package com.pigdroid.javatoproto.samples;
 
 public class ArrayMessage {
 

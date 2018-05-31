@@ -1,9 +1,9 @@
-package com.lloyd.JavaToProto.tests;
+package com.pigdroid.javatoproto;
 
 import org.junit.Test;
 
-import com.lloyd.JavaToProto.*;
-import com.lloyd.JavaToProto.tests.samples.*;
+import com.pigdroid.javatoproto.*;
+import com.pigdroid.javatoproto.samples.*;
 
 public class ProtoFileGenerationTests {
 
